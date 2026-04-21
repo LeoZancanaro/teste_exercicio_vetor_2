@@ -1,12 +1,15 @@
 package main;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class Main {
 
     public static void main(String[] args) {
         String[] nomes = new String[100];
         float[] notas = new float[100];
+        JTextArea textArea = new JTextArea(3, 30);
         int n = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade de alunos"));
 
         for (int i = 0; i < n; i++) {
@@ -19,10 +22,13 @@ public class Main {
             soma += notas[i];
         }
         float media = soma / n;
-        System.out.println("A media das notas eh " + media);
-
-        for (int i = 0; i < n; i++) {
-            System.out.println("Nome: " + nomes[i] + " nota: " + notas[i]);
+        textArea.setText("A média dos alunos é " + media + "\n");
+        
+        for(int i = 0; i < n; i++) {
+            textArea.append("Nome: " + nomes[i] + " nota: " + notas[i] + "\n");
         }
+        textArea.setEditable(false);
+        JScrollPane painelRolagem = new JScrollPane(textArea);
+        JOptionPane.showMessageDialog(null, painelRolagem, "Titulo", JOptionPane.WARNING_MESSAGE);
     }
 }
